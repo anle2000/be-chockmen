@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "netlify dev",
     "build": "netlify build",
     "deploy": "netlify deploy"
