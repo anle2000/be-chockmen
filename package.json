@@ -1,0 +1,22 @@
+{
+  "name": "async-data-tnt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "netlify build",
+    "deploy": "netlify deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@netlify/functions": "^3.0.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "firebase-admin": "^13.0.2",
+    "node-cron": "^3.0.3",
+    "qs": "^6.13.1"
+  }
+}
