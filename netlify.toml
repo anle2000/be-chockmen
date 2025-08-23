@@ -1,5 +1,8 @@
 [build]
-functions = "netlify/functions"
+  functions = "netlify/functions"
 
 [functions."async_order_kiot_viet"]
   schedule = "*/30 * * * *"
+
+[dev]
+  port = 9002
