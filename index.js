@@ -13,17 +13,12 @@ app.use(express.json());
 // Middleware giả lập Netlify Lambda-style event
 function netlifyWrapper(handler) {
   return async (req, res) => {
+    const isBodyMethod = !["GET", "HEAD"].includes(req.method);
     const event = {
       httpMethod: req.method,
       path: req.path,
       headers: req.headers,
-      // ⚠️ Sửa đoạn này để tránh lỗi parse undefined
-      body:
-        req.method === "GET" || req.method === "HEAD"
-          ? ""
-          : req.body
-          ? JSON.stringify(req.body)
-          : "",
+      body: isBodyMethod && req.body ? JSON.stringify(req.body) : undefined,
       queryStringParameters: req.query,
     };
 

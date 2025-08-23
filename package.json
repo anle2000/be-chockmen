@@ -1,7 +1,7 @@
 {
   "name": "async-data-tnt",
   "version": "1.0.0",
-  "description": "",
+  "description": "build & deploy => netlify deploy --prod --dir .",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -15,9 +15,21 @@
   "dependencies": {
     "@netlify/functions": "^3.0.0",
     "axios": "^1.7.9",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "firebase-admin": "^13.0.2",
+    "express": "^5.1.0",
+    "firebase-admin": "^13.4.0",
     "node-cron": "^3.0.3",
     "qs": "^6.13.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anle2000/be-chockmen.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/anle2000/be-chockmen/issues"
+  },
+  "homepage": "https://github.com/anle2000/be-chockmen#readme"
 }
