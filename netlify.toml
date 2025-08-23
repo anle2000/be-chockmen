@@ -1,5 +1,0 @@
-[build]
-functions = "netlify/functions"
-
-[functions."async_order_kiot_viet"]
-  schedule = "*/30 * * * *"
