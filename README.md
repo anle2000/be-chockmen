@@ -1,1 +1,1 @@
-# be-chockmen
+build & deploy => netlify deploy --prod --dir .
