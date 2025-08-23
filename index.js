@@ -5,19 +5,25 @@ const path = require("path");
 const app = express();
 const port = 3000;
 
-// 👉 Sửa lại đúng thư mục chứa functions kiểu Netlify
+// 👉 Thư mục chứa các function kiểu Netlify
 const functionsDir = path.join(__dirname, "netlify/functions");
 
 app.use(express.json());
 
-// Middleware giả lập Netlify event
+// Middleware giả lập Netlify Lambda-style event
 function netlifyWrapper(handler) {
   return async (req, res) => {
     const event = {
       httpMethod: req.method,
       path: req.path,
       headers: req.headers,
-      body: req.body ? JSON.stringify(req.body) : undefined,
+      // ⚠️ Sửa đoạn này để tránh lỗi parse undefined
+      body:
+        req.method === "GET" || req.method === "HEAD"
+          ? ""
+          : req.body
+          ? JSON.stringify(req.body)
+          : "",
       queryStringParameters: req.query,
     };
 
@@ -34,13 +40,13 @@ function netlifyWrapper(handler) {
   };
 }
 
-// Đảm bảo thư mục tồn tại
+// 🔍 Kiểm tra thư mục tồn tại
 if (!fs.existsSync(functionsDir)) {
   console.error(`❌ Directory not found: ${functionsDir}`);
   process.exit(1);
 }
 
-// Load tất cả file .js trong thư mục netlify/functions
+// 🔁 Tự động mount các function trong thư mục netlify/functions
 fs.readdirSync(functionsDir).forEach((file) => {
   if (file.endsWith(".js")) {
     const route = "/" + file.replace(/\.js$/, "");
