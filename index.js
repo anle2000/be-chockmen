@@ -51,7 +51,8 @@ fs.readdirSync(functionsDir).forEach((file) => {
       const handlerModule = require(handlerPath);
       if (typeof handlerModule.handler === "function") {
         console.log(`✅ Route mounted: ${route}`);
-        app.all("/api/chockmen" + route, netlifyWrapper(handlerModule.handler));
+        // ✅ Sửa tại đây: KHÔNG thêm /api/chockmen lần nữa
+        app.all(route, netlifyWrapper(handlerModule.handler));
       } else {
         console.warn(`⚠️  No valid 'handler' export in: ${file}`);
       }
