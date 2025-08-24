@@ -44,7 +44,7 @@ if (!fs.existsSync(functionsDir)) {
 // 🔁 Tự động mount các function trong thư mục netlify/functions
 fs.readdirSync(functionsDir).forEach((file) => {
   if (file.endsWith(".js")) {
-    const route = "/" + file.replace(/\.js$/, "");
+    const route = "/api/chockmen/" + file.replace(/\.js$/, "");
     const handlerPath = path.join(functionsDir, file);
 
     try {
