@@ -35,24 +35,24 @@ function netlifyWrapper(handler) {
   };
 }
 
-// 🔍 Kiểm tra thư mục tồn tại
+// Kiểm tra thư mục tồn tại
 if (!fs.existsSync(functionsDir)) {
   console.error(`❌ Directory not found: ${functionsDir}`);
   process.exit(1);
 }
 
-// 🔁 Tự động mount các function trong thư mục netlify/functions
+// Mount các function trong thư mục netlify/functions
 fs.readdirSync(functionsDir).forEach((file) => {
   if (file.endsWith(".js")) {
-    const route = "/api/chockmen/" + file.replace(/\.js$/, "");
+    const functionName = file.replace(/\.js$/, "");
+    const route = `/api/chockmen/${functionName}`;
     const handlerPath = path.join(functionsDir, file);
 
     try {
       const handlerModule = require(handlerPath);
       if (typeof handlerModule.handler === "function") {
-        console.log(`✅ Route mounted: ${route}`);
-        // ✅ Sửa tại đây: KHÔNG thêm /api/chockmen lần nữa
         app.all(route, netlifyWrapper(handlerModule.handler));
+        console.log(`✅ Route mounted: ${route}`);
       } else {
         console.warn(`⚠️  No valid 'handler' export in: ${file}`);
       }
